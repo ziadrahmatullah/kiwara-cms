@@ -43,7 +43,7 @@ export const useAuthStore = create<AuthState>()(
             if (status === 401 || status === 400) msg = "Email atau password salah.";
             else msg = err.response?.data?.message || err.response?.data?.error || err.message || msg;
           }
-          throw new Error(msg);
+          throw new Error(msg, { cause: err });
         }
       },
 

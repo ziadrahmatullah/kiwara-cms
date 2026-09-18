@@ -4,10 +4,12 @@ import { Toaster } from "sonner";
 import { queryClient } from "@/shared/lib/queryClient";
 import { ErrorBoundary, Layout, NotFound, ProtectedRoute, RequireRole } from "@/shared/components";
 import { LoginPage } from "@/domains/auth";
-
-function Placeholder({ name }: { name: string }) {
-  return <div className="text-sm text-muted-foreground">{name} — segera hadir.</div>;
-}
+import { Dashboard } from "@/domains/dashboard";
+import { GalleryList } from "@/domains/gallery";
+import { EventForm, EventList } from "@/domains/events";
+import { UserForm, UserList } from "@/domains/users";
+import { ChangePasswordPage } from "@/domains/settings";
+import { UcapanDetail, UcapanList } from "@/domains/ucapan";
 
 export default function App() {
   return (
@@ -22,22 +24,22 @@ export default function App() {
                 index
                 element={
                   <ErrorBoundary>
-                    <Placeholder name="Dashboard" />
+                    <Dashboard />
                   </ErrorBoundary>
                 }
               />
-              <Route path="gallery" element={<Placeholder name="Galeri" />} />
-              <Route path="ucapan" element={<Placeholder name="Ucapan" />} />
-              <Route path="ucapan/:id" element={<Placeholder name="Detail ucapan" />} />
+              <Route path="gallery" element={<GalleryList />} />
+              <Route path="ucapan" element={<UcapanList />} />
+              <Route path="ucapan/:id" element={<UcapanDetail />} />
               <Route element={<RequireRole roles={["admin"]} />}>
-                <Route path="events" element={<Placeholder name="Event" />} />
-                <Route path="events/new" element={<Placeholder name="Tambah event" />} />
-                <Route path="events/:id/edit" element={<Placeholder name="Edit event" />} />
-                <Route path="users" element={<Placeholder name="Pengguna" />} />
-                <Route path="users/new" element={<Placeholder name="Tambah pengguna" />} />
-                <Route path="users/:id/edit" element={<Placeholder name="Edit pengguna" />} />
+                <Route path="events" element={<EventList />} />
+                <Route path="events/new" element={<EventForm />} />
+                <Route path="events/:id/edit" element={<EventForm />} />
+                <Route path="users" element={<UserList />} />
+                <Route path="users/new" element={<UserForm />} />
+                <Route path="users/:id/edit" element={<UserForm />} />
               </Route>
-              <Route path="settings/change-password" element={<Placeholder name="Ganti password" />} />
+              <Route path="settings/change-password" element={<ChangePasswordPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

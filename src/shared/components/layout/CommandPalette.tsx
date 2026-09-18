@@ -64,22 +64,19 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onOpenChange]);
 
-  useEffect(() => {
-    if (!open) {
-      setQuery("");
-      setActive(0);
-    }
-  }, [open]);
-
-  useEffect(() => setActive(0), [query]);
+  const close = () => {
+    setQuery("");
+    setActive(0);
+    onOpenChange(false);
+  };
 
   const runItem = (item: PaletteItem) => {
-    onOpenChange(false);
+    close();
     item.run();
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(v) => (v ? onOpenChange(true) : close())}>
       <DialogContent className="max-w-md p-0 gap-0 overflow-hidden" hideClose>
         <DialogTitle className="sr-only">Cari halaman</DialogTitle>
         <div className="flex items-center gap-2 px-3 border-b">
@@ -87,7 +84,10 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
           <input
             autoFocus
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setActive(0);
+            }}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown") {
                 e.preventDefault();
