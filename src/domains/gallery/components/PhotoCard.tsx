@@ -38,7 +38,7 @@ export function PhotoCard({ image, mode, showGuest = true, onOpen, onDelete, onV
       }}
       className={cn(
         "group relative w-full h-full rounded-xl overflow-hidden border cursor-pointer hover:shadow-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        mode === "framed" ? "bg-neutral-900" : "bg-muted",
+        mode === "framed" ? "bg-neutral-200 dark:bg-neutral-800" : "bg-muted",
         className,
       )}
     >

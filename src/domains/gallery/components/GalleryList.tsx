@@ -76,8 +76,8 @@ export function GalleryList() {
         title="Galeri Foto"
         description={
           <>
-            Foto photobooth dari buku tamu.{" "}
-            {!isLoading && <span className="text-foreground font-medium">{formatNumberID(total)} foto</span>}
+            Bingkai foto dari buku tamu & photobooth.{" "}
+            {!isLoading && <span className="text-foreground font-medium">{formatNumberID(total)} bingkai</span>}
           </>
         }
         actions={<ViewModeToggle value={mode} onChange={setMode} />}
@@ -117,7 +117,7 @@ export function GalleryList() {
           limit={limit}
           pagination={data.pagination}
           limitOptions={[12, 24, 48]}
-          unitLabel="foto"
+          unitLabel="bingkai"
           onPageChange={setPage}
           onLimitChange={setLimit}
         />

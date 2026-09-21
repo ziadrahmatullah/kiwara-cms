@@ -12,6 +12,7 @@ export function buildBreadcrumbs(pathname: string): Crumb[] {
     for (const item of section.items) {
       const base: Crumb[] = section.sectionLabel ? [{ label: section.sectionLabel }] : [];
       if (matchPath({ path: item.to, end: true }, pathname)) return [...base, { label: item.label }];
+      if (item.end) continue; // Dashboard: jangan tangkap /panel/<halaman-lain>
       if (matchPath(`${item.to}/new`, pathname)) {
         return [...base, { label: item.label, to: item.to }, { label: `Tambah ${item.label}` }];
       }

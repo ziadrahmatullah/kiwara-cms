@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Download, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { photoCount as countPhotos } from "@/shared/lib/images";
 import type { GuestbookMessage } from "@/types/api";
 import { useAuthStore } from "@/domains/auth/store/useAuthStore";
 import {
@@ -86,6 +87,7 @@ export function UcapanDetail() {
 
   const prefix = filePrefixFor(message.event);
   const imageCount = message.images.length;
+  const totalPhotos = message.images.reduce((sum, img) => sum + countPhotos(img), 0);
 
   const handleDownloadAll = () => {
     const files = buildDownloadItems(message);
@@ -187,7 +189,9 @@ export function UcapanDetail() {
       {/* Foto */}
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="text-lg font-semibold">Foto ({imageCount})</h2>
+          <h2 className="text-lg font-semibold">
+            Foto ({totalPhotos}) <span className="text-sm font-normal text-muted-foreground">· {imageCount} bingkai</span>
+          </h2>
           {imageCount > 0 && <ViewModeToggle value={galleryViewMode} onChange={setGalleryViewMode} size="sm" />}
         </div>
         {imageCount === 0 ? (

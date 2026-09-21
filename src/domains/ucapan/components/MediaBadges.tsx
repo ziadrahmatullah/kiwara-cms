@@ -1,9 +1,11 @@
 import { Images, Mic } from "lucide-react";
 import type { GuestbookMessage } from "@/types/api";
 import { Badge } from "@/shared/components/ui/badge";
+import { photoCount as countPhotos } from "@/shared/lib/images";
 
 export function MediaBadges({ message }: { message: GuestbookMessage }) {
-  const photoCount = message.images?.length ?? 0;
+  // Jumlah foto asli: bingkai strip dihitung 3, bukan 1.
+  const photoCount = (message.images ?? []).reduce((sum, img) => sum + countPhotos(img), 0);
   if (photoCount === 0 && !message.voice_link) {
     return <span className="text-xs text-muted-foreground italic">Teks saja</span>;
   }

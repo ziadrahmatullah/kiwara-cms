@@ -51,7 +51,7 @@ export function Dashboard() {
           <div className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-4 ${isFetching && !isLoading ? "opacity-70" : ""} transition-opacity`}>
             <StatTile label="Total ucapan" value={stats?.total_messages} icon={MessageSquareText} loading={isLoading} />
             <StatTile
-              label="Total foto"
+              label="Total bingkai"
               value={stats?.total_images}
               icon={Images}
               loading={isLoading}
